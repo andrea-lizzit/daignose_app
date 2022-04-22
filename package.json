@@ -7,11 +7,16 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
+    "drag-drop": "^7.2.0",
     "electron": "^18.1.0",
     "electron-is-dev": "^2.0.0",
+    "fs-extra": "^10.1.0",
+    "open": "^8.4.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-scripts": "5.0.1",
+    "react-tabs": "^5.1.0",
+    "react-treeview": "^0.4.7",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
