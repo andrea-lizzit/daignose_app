@@ -1,0 +1,21 @@
+.patientview {
+	background-color: #323d52;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	justify-content: left;
+	font-size: calc(6px + 2vmin);
+	color: white;	
+}
+
+.patient {
+	background-color: #323d52;
+	min-height: 10vh;
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	justify-content: left;
+	font-size: calc(6px + 2vmin);
+	color: white;	
+}

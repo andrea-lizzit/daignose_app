@@ -1,4 +1,6 @@
 import React from "react";
+import './Patientview.css';
+
 const TreeView = require('react-treeview');
 const ipcRenderer  = window.require('electron').ipcRenderer;
 
@@ -15,10 +17,10 @@ class Patient extends React.Component {
             <span className="node" onClick={()=>{
 				this.props.onClick()
 				}}>
-              name
+              {name}
             </span>;
 		return (
-			<div>
+			<div className="patient">
 			<TreeView key={name} nodeLabel={label} collapsed={this.props.collapsed}>
 				<TreeView key={name/images} nodeLabel={"images"} collapsed={this.props.collapsed}>
 					{images.map((node, i) => {
