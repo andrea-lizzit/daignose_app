@@ -3,6 +3,7 @@ const path = require( 'path' );
 const fs = require( 'fs-extra' );
 const os = require( 'os' );
 const open = require( 'open' );
+const { readdir } = require('fs').promises;
 
 
 // get application directory
@@ -11,7 +12,7 @@ fs.ensureDirSync( appDir );
 /****************************/
 
 // get the list of files
-exports.getFiles = () => {
+exports.getFiles2 = () => {
     const files = fs.readdirSync( appDir );
 
     return files.map( filename => {
@@ -25,6 +26,22 @@ exports.getFiles = () => {
         };
     } );
 };
+
+getFiles = async function(dir = appDir) {
+    const dirents = await readdir(dir, { withFileTypes: true });
+    const files = await Promise.all(dirents.map((dirent) => {
+        const res = path.resolve(dir, dirent.name);
+        var ret;
+        if (dirent.isDirectory()) {
+            ret = getFiles(res);
+        } else {
+            ret = res;
+        }
+        return ret
+    }));
+    return files;//Array.prototype.concat(...files);
+}
+exports.getFiles = getFiles
 
 /****************************/
 

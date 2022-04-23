@@ -1,9 +1,20 @@
 import logo from './logo.svg';
-import './App.css';
+//import './App.css';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 import Lists from './controlled.js'
+import PatientView from './patientview.js'
+
+const ipcRenderer  = window.require('electron').ipcRenderer;
+
+var dashboard_info = "open a new diagnosis";
+function handleDiag(files) {
+  const img = files[0];
+  ipcRenderer.invoke('app:diagnose-img', img).then( (diag) => {
+    dashboard_info = diag;
+  });
+}
 
 function App() {
   return (
@@ -13,32 +24,12 @@ function App() {
           <TabList>
             <Tab>Database</Tab>
             <Tab>Diagnosis details</Tab>
-            <Tab>Messaging and Network</Tab>
-            <Tab>Lorem</Tab>
           </TabList>
           <TabPanel>
-            <button onClick={ () => window.updateFiles()}></button>
-            <div id='filelist' class='app__files'></div>
+            <PatientView onDiag={(files) => handleDiag(files)}></PatientView>
           </TabPanel>
           <TabPanel>
-            <Lists dataSource={[['A', 'B'], ['C', 'D']]}></Lists>
-          </TabPanel>
-          <TabPanel>
-            lorem3
-          </TabPanel>
-          <TabPanel>
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
+            <span>{dashboard_info}</span>
           </TabPanel>
         </Tabs>
       </header>

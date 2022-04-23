@@ -2,6 +2,7 @@ const path = require("path");
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const io = require( './io' );  
 const isDev = require("electron-is-dev");
+const diagnose = require("./diagnose")
 
 function createWindow() {
   // Create the browser window.
@@ -71,6 +72,11 @@ ipcMain.handle( 'app:on-fs-dialog-open', ( event ) => {
       };
   } ) );
 } );
+
+ipcMain.handle('app:diagnose-img', (event, file) => {
+  diag = diagnose.diagnose(file);
+  return diag;
+});
 
 /*-----*/
 

@@ -7,10 +7,14 @@ class PatientElement extends React.Component {
 		super(props);
 	}
 	render() {
+		const label =
+            <span className="node">
+              this.props.name
+            </span>;
 		return (
 			<TreeView
 				key={this.props.name}
-				nodeLabel={this.props.name}>
+				nodeLabel={label}>
 				{["a","v"].map(entry => <div className="info" key={entry}>{entry}</div>)}
 			</TreeView>
 		);
