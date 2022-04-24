@@ -11,6 +11,8 @@ Using the ChestX-ray dataset from NIH Clinical Center, create an AI-driven assis
 
 ## installation instructions:
 
+to run this application you need to have installed the [inference](https://github.com/andrea-lizzit/daignose_inference) package
+
 clone this repository
 
 install node dependencies with `npm install`
