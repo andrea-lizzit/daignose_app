@@ -4,7 +4,7 @@ const fs = require( 'fs-extra' );
 const os = require( 'os' );
 const open = require( 'open' );
 const { readdir } = require('fs').promises;
-
+const dirTree = require("directory-tree");
 
 // get application directory
 const appDir = path.resolve( os.homedir(), 'dAIgnosis-files' );
@@ -27,7 +27,7 @@ exports.getFiles2 = () => {
     } );
 };
 
-getFiles = async function(dir = appDir) {
+getFiles3 = async function(dir = appDir) {
     const dirents = await readdir(dir, { withFileTypes: true });
     const files = await Promise.all(dirents.map((dirent) => {
         const res = path.resolve(dir, dirent.name);
@@ -40,6 +40,9 @@ getFiles = async function(dir = appDir) {
         return ret
     }));
     return files;//Array.prototype.concat(...files);
+}
+getFiles = function(dir = appDir) {
+    return dirTree(dir);
 }
 exports.getFiles = getFiles
 
@@ -80,3 +83,8 @@ exports.openFile = ( filename ) => {
         open( filePath );
     }
 };
+
+exports.getFile = (filename) => {
+    console.log(filename);
+    return fs.readFileSync(filename).toString("base64");
+}

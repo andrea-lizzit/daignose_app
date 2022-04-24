@@ -19,3 +19,24 @@
 	font-size: calc(6px + 2vmin);
 	color: white;	
 }
+
+.dashboard_view {
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	align-items: center;
+	margin: auto;
+	width: auto;
+}
+.react-tabs {
+	width: 80%;
+}
+.img-wrapper {
+	width:40%;
+}
+.dashboard_view img {
+	width: 40%;
+}
+.graph-wrapper {
+	width:40%;
+}

@@ -22,7 +22,7 @@ function createWindow() {
 
   // Open the DevTools.
   if (isDev) {
-    win.webContents.openDevTools({ mode: "detach" });
+    //win.webContents.openDevTools({ mode: "detach" });
   }
 }
 
@@ -53,6 +53,11 @@ app.on("activate", () => {
 ipcMain.handle( 'app:get-files', () => {
   return io.getFiles();
 } );
+
+ipcMain.handle( 'app:get-file', (event, filename) => {
+  return io.getFile(filename);
+} );
+
 
 // listen to file(s) add event
 ipcMain.handle( 'app:on-file-add', ( event, files = [] ) => {

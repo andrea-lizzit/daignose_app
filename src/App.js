@@ -13,12 +13,16 @@ const ipcRenderer  = window.require('electron').ipcRenderer;
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {dashboard_info: {prob: [], classes: []}}
+    this.state = {dashboard_info: {prob: [], classes: []},
+                  dashboard_img: undefined}
   }
   handleDiag(files) {
-    const img = files[0];
+    const img = files;
     ipcRenderer.invoke('app:diagnose-img', img).then( (diag) => {
       this.setState({dashboard_info: diag});
+    });
+    ipcRenderer.invoke('app:get-file', img).then( (imdata) => {
+      this.setState({dashboard_img: imdata});
     });
   }
   render() {
@@ -34,7 +38,7 @@ class App extends React.Component {
               <PatientView onDiag={(files) => this.handleDiag(files)} className="patientview"></PatientView>
             </TabPanel>
             <TabPanel>
-              <Dataviz dashboard_info={this.state.dashboard_info}></Dataviz>
+              <Dataviz dashboard_info={this.state.dashboard_info} dashboard_img={this.state.dashboard_img}></Dataviz>
             </TabPanel>
           </Tabs>
         </header>

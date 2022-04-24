@@ -45,7 +45,18 @@ class Dataviz extends React.Component {
 	  this.state = {data: data};
 	}
 	render() {
-	  return <Pie data={this.state.data}></Pie>
+		if (this.props.dashboard_img) {
+			return (<div className='dashboard_view'>
+				<div className='graph-wrapper'>
+				<Pie data={this.state.data}></Pie>
+				</div>
+					<img className='dashboard_img' src={`data:image/jpeg;base64,${this.props.dashboard_img}`} />
+				<div className='img-wrapper'>
+				</div>
+				</div>);
+		} else {
+			return (<Pie data={this.state.data}></Pie>); 
+		}
 	}
   }
 
